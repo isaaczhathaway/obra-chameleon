@@ -16,7 +16,7 @@ jobs:
       - name: Install validation tools
         run: |
           sudo apt-get update
-          sudo apt-get install --yes jq p7zip-full shellcheck unzip zip
+          sudo apt-get install --yes jq p7zip-full ripgrep shellcheck unzip zip
 
       - name: Audit tracked files
         run: scripts/audit-repository.sh --tracked
