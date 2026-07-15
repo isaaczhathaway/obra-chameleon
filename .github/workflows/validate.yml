@@ -1,0 +1,84 @@
+name: Validate
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install validation tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes jq p7zip-full shellcheck unzip zip
+
+      - name: Audit tracked files
+        run: scripts/audit-repository.sh --tracked
+
+      - name: Validate shell scripts
+        run: |
+          bash -n scripts/audit-repository.sh scripts/build-release.sh
+          bash -n scripts/package/common/install-linux-common.sh
+          bash -n scripts/package/ubuntu/install.sh scripts/package/bazzite/install.sh
+          shellcheck scripts/audit-repository.sh scripts/build-release.sh
+          shellcheck scripts/package/common/install-linux-common.sh
+          shellcheck scripts/package/ubuntu/install.sh scripts/package/bazzite/install.sh
+
+      - name: Build and verify v0.2 archive
+        run: |
+          scripts/build-release.sh --force
+          unzip -t "Obra Chameleon v0.2.zip"
+          if zipinfo -1 "Obra Chameleon v0.2.zip" | grep -E -i '\.(dll|exe)$'; then
+            echo "Third-party executable found in release archive" >&2
+            exit 1
+          fi
+          stage="$(mktemp -d)"
+          unzip -q "Obra Chameleon v0.2.zip" -d "$stage"
+          cd "$stage/Obra Chameleon"
+          sha256sum --check SHA256SUMS
+          sha256sum --check common/PAYLOAD-SHA256SUMS
+          jq -e '.name == "Obra Chameleon" and .version == "0.2" and .reshade.bundled == false' manifest.json
+
+      - name: Create release checksum
+        run: sha256sum "Obra Chameleon v0.2.zip" > "Obra Chameleon v0.2.zip.sha256"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: obra-chameleon-v0.2
+          path: |
+            Obra Chameleon v0.2.zip
+            Obra Chameleon v0.2.zip.sha256
+
+  windows:
+    needs: linux
+    runs-on: windows-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: obra-chameleon-v0.2
+          path: release-dist
+
+      - name: Validate Windows installer fixture
+        shell: pwsh
+        run: |
+          $fixture = Join-Path $PWD "fixture"
+          New-Item -ItemType Directory -Path $fixture | Out-Null
+          Expand-Archive -LiteralPath "release-dist/Obra Chameleon v0.2.zip" -DestinationPath $fixture
+          New-Item -ItemType File -Path (Join-Path $fixture "PenguinHotel.exe") | Out-Null
+          New-Item -ItemType Directory -Path (Join-Path $fixture "Engine") | Out-Null
+          $runtime = Join-Path $fixture "Chameleon/Binaries/Win64"
+          New-Item -ItemType Directory -Path $runtime -Force | Out-Null
+          New-Item -ItemType File -Path (Join-Path $runtime "PenguinHotel-Win64-Shipping.exe") | Out-Null
+          $package = Join-Path $fixture "Obra Chameleon"
+          & (Join-Path $package "windows/install.ps1") -DryRun -NoPause
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          $launcher = Get-Content -LiteralPath (Join-Path $package "windows/Install Obra Chameleon.cmd") -Raw
+          if ($launcher -notmatch 'powershell\.exe' -or $launcher -notmatch '(?im)^pause\s*$') {
+            throw "CMD launcher does not contain the expected PowerShell invocation and pause"
+          }

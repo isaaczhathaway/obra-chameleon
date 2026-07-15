@@ -1,0 +1,12 @@
+* text=auto
+
+*.cmd text eol=crlf
+*.fx text eol=lf
+*.fxh text eol=lf
+*.ini text eol=lf
+*.md text eol=lf
+*.ps1 text eol=crlf
+*.sh text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.png binary

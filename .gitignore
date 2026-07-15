@@ -1,0 +1,47 @@
+# This repository intentionally lives inside a Steam game installation.
+# Ignore every root entry, then allow only reviewed project source paths.
+/*
+
+!/.gitignore
+!/.gitattributes
+!/LICENSE
+!/README.md
+!/CHANGELOG.md
+!/CONTRIBUTING.md
+
+!/.github/
+!/.github/**
+
+!/.githooks/
+!/.githooks/**
+
+!/assets/
+/assets/*
+!/assets/README.md
+!/assets/screenshots/
+!/assets/screenshots/**
+
+!/docs/
+/docs/*
+!/docs/compatibility.md
+!/docs/packaging.md
+!/docs/shader-design.md
+!/docs/testing.md
+
+!/reshade/
+/reshade/*
+!/reshade/Presets/
+!/reshade/Presets/**
+!/reshade/Shaders/
+!/reshade/Shaders/**
+
+!/scripts/
+/scripts/*
+!/scripts/audit-repository.sh
+!/scripts/build-release.sh
+!/scripts/package/
+!/scripts/package/**
+
+# Generated release artifacts are uploaded separately, not committed.
+/*.zip
+/*.sha256
