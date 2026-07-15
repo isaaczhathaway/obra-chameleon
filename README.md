@@ -6,13 +6,15 @@ No assets or shaders from either game are included.
 
 ## Gallery
 
-| Prototype capture 1 | Prototype capture 2 |
+| Title screen | Gameplay |
 | --- | --- |
-| ![Obra Chameleon shader-on gameplay capture](assets/screenshots/prototype-01.png) | ![Obra Chameleon shader-on gameplay capture](assets/screenshots/prototype-02.png) |
+| ![Obra Chameleon shader-on title screen](assets/screenshots/prototype-01.png) | ![Obra Chameleon shader-on gameplay capture](assets/screenshots/prototype-02.png) |
 
-Both images are separate shader-on captures using the same 640x360 prototype preset. They are not a before-and-after comparison. See [assets/README.md](assets/README.md) for image licensing details.
+Both images are separate 1920x1080 shader-on captures. They are not a before-and-after comparison. See [assets/README.md](assets/README.md) for image licensing details.
 
 ## Install v0.2
+
+> **WARNING: THIS MOD MAY GET YOU BANNED. USE AT YOUR OWN RISK. DO NOT USE IT ON PUBLIC SERVERS.** Anti-cheat and integrity behavior has not been confirmed.
 
 Download **Obra Chameleon v0.2.zip** from the [latest release](../../releases/latest). Extract the `Obra Chameleon` directory directly inside the Meccha Chameleon installation root, next to `PenguinHotel.exe`.
 

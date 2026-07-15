@@ -1,5 +1,7 @@
 # Bazzite Installation
 
+> **WARNING: THIS MOD MAY GET YOU BANNED. USE AT YOUR OWN RISK. DO NOT USE IT ON PUBLIC SERVERS.** Anti-cheat and integrity behavior has not been confirmed.
+
 These instructions apply to Bazzite using Steam and Proton. Installation stays inside the game directory and does not use `rpm-ostree`, install a global Vulkan layer, or modify the Proton registry.
 
 ## Requirements

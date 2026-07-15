@@ -4,6 +4,8 @@ Obra Chameleon is a custom ReShade effect for Meccha Chameleon. It applies a two
 
 ## Before Installing
 
+> **WARNING: THIS MOD MAY GET YOU BANNED. USE AT YOUR OWN RISK. DO NOT USE IT ON PUBLIC SERVERS.** Anti-cheat and integrity behavior has not been confirmed.
+
 1. In Steam, open Meccha Chameleon > Manage > Browse local files.
 2. Close Meccha Chameleon.
 3. Extract `Obra Chameleon v0.2.zip` into that game folder.

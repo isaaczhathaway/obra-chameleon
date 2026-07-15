@@ -1,5 +1,7 @@
 # Ubuntu Installation
 
+> **WARNING: THIS MOD MAY GET YOU BANNED. USE AT YOUR OWN RISK. DO NOT USE IT ON PUBLIC SERVERS.** Anti-cheat and integrity behavior has not been confirmed.
+
 These instructions are for the normal Linux Steam client running Meccha Chameleon through Proton.
 
 ## Requirements

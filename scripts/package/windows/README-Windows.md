@@ -1,5 +1,7 @@
 # Windows Installation
 
+> **WARNING: THIS MOD MAY GET YOU BANNED. USE AT YOUR OWN RISK. DO NOT USE IT ON PUBLIC SERVERS.** Anti-cheat and integrity behavior has not been confirmed.
+
 The Windows installer downloads and opens the official ReShade setup program. One guided ReShade step is required before the script installs the Obra Chameleon shader and default preset.
 
 ## Requirements
